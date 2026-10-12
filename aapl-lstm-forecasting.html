@@ -7601,7 +7601,6 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>[*********************100%***********************]  1 of 1 completed
-
 </pre>
 </div>
 </div>
@@ -7882,7 +7881,7 @@ torch.Size([64, 1])
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Define-LSTM-Model">Define LSTM Model<a class="anchor-link" href="#Define-LSTM-Model">¶</a></h2><p>The LSTM model was constructed with an <code>input_size</code> of 1 because the model uses only the daily closing price as its input feature.  The LSTM contains 50 features in its hidden state (<code>hidden_size = 64</code>) and consists of two stacked LSTM layers (<code>num_layers = 2</code>) to allow the model to learn patterns across the time series.  The model uses a learnable bias (<code>bias = True</code>), which allows the LSTM to learn a bias term along with its other parameters and gives it a little more flexibility when learning patterns in the stock price data.</p>
+<h2 id="Define-LSTM-Model">Define LSTM Model<a class="anchor-link" href="#Define-LSTM-Model">¶</a></h2><p>The LSTM model was constructed with an <code>input_size</code> of 1 because the model uses only the daily closing price as its input feature.  The LSTM contains 64 features in its hidden state (<code>hidden_size = 64</code>) and consists of two stacked LSTM layers (<code>num_layers = 2</code>) to allow the model to learn patterns across the time series.  The model uses a learnable bias (<code>bias = True</code>), which allows the LSTM to learn a bias term along with its other parameters and gives it a little more flexibility when learning patterns in the stock price data.</p>
 <p>The <code>batch_first = True</code> parameter specifies that input tensors are organized with the batch size as the first dimension, followed by the sequence length and number of features.  Finally, a dropout rate of 0.2 (<code>dropout = 0.2</code>) was applied between the LSTM layers as a regularization technique to reduce overfitting. This means that 20% of the outputs between the LSTM layers are randomly dropped during training.</p>
 <h2 id="Forward-Pass">Forward Pass<a class="anchor-link" href="#Forward-Pass">¶</a></h2><p>The <code>forward()</code> method defines how the input data passes through the model.  First, the input tensor is passed through the two-layer LSTM.  The LSTM then returns an output for each time step, along with the final hidden and cell states.  Since the goal is to predict the closing price for the next day, only the output from the final step is selected using <code>x = x[:, -1, :]</code>.  This output is then passed through the linear layer, which produces the predicted closing price.  Finally, the prediction is then returned as the model's output.</p>
 </div>
@@ -8209,7 +8208,7 @@ Best Test RMSE: 0.0269
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s1">'aapl-lstm-forecasting.pth'</span><span class="p">)</span>
